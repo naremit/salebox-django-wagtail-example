@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
 
+    'debug_toolbar',
     'modelcluster',
     'saleboxdjango',
     'taggit',
@@ -47,11 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.humanize',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'saleboxdjango.middleware.SaleboxMiddleware'
@@ -109,6 +111,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'saleboxdjango.context_processor.salebox',
             ],
+            #'loaders': [
+            #    ('django.template.loaders.cached.Loader', [
+            #        'django.template.loaders.filesystem.Loader',
+            #        'django.template.loaders.app_directories.Loader',
+            #    ]),
+            #]
         },
     },
 ]
@@ -180,10 +188,10 @@ STATICFILES_DIRS = [
 # See https://docs.djangoproject.com/en/3.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'
 
 
@@ -194,3 +202,8 @@ WAGTAIL_SITE_NAME = "www"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    'RESULTS_CACHE_SIZE': 100
+}

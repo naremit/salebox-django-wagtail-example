@@ -1,31 +1,47 @@
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include, path, re_path
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.images.views.serve import ServeView
+
+from saleboxdjango.views.account.basket import SaleboxAccountBasketView
+from saleboxdjango.views.account.wishlist import SaleboxAccountWishlistView
 
 from search import views as search_views
 
+
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
-
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    re_path(r'^img/([^/]*)/(\d*)/([^/]*)/[^/]*', ServeView.as_view(), name='wagtailimages_serve'),
 
+    # fixed-path items: salebox
+    url(r'basket/', SaleboxAccountBasketView.as_view()),
+    # url(r'checkout/', include('apps.checkout.urls')),
+    url(r'salebox/', include('saleboxdjango.urls')),
+    url(r'wishlist/', SaleboxAccountWishlistView.as_view()),
+
+    # wagtail search view
     url(r'^search/$', search_views.search, name='search'),
-
 ]
 
 
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    import debug_toolbar
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+        path(r'__debug__/', include(debug_toolbar.urls))
+    ]
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
