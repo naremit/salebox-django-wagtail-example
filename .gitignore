@@ -1,0 +1,4 @@
+node_modules
+*.pyc
+
+www/settings/local.py
