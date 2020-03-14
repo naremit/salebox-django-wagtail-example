@@ -46,3 +46,16 @@ This repo is a starting point for your project, it is not a *one size fits all* 
 
         python manage.py runserver
 
+
+### Working with CSS and JavaScript
+
+The CSS and JS source files are stored in `www/staticsrc/`. These are concatenated and minified using `gulp` to create production ready files which are stored in `www/static/'. To get started (from your project folder):
+
+        cd www/staticsrc
+        npm install
+
+The files are pre-built, i.e. when you clone the repo you can start immediately. When you want to start working on them during development, however, you will need to start and leave gulp running (from your project folder):
+
+    cd www/staticsrc
+    gulp
+
