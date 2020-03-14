@@ -22,13 +22,13 @@ function js(cb) {
         'www/staticsrc/js/*.js',
     ])
     .pipe(concat('salebox.js'))
-    .pipe(csso())
-    .pipe(dest('www/static/'));
+    .pipe(uglify())
+    .pipe(dest('../static/js/'));
 }
 
 function watchFiles(cb) {
     watch("www/staticsrc/sass/**/*", series(css));
-    // watch("www/staticsrc/js/*", series(js));
+    watch("www/staticsrc/js/*", series(js));
 }
 
-exports.default = series(css, parallel(watchFiles));
+exports.default = series(css, js, parallel(watchFiles));
