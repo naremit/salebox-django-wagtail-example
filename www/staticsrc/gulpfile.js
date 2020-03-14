@@ -1,6 +1,6 @@
 const { dest, parallel, series, src, watch } = require('gulp');
 const concat = require('gulp-concat');
-const minifycss = require('gulp-minify-css');
+const csso = require('gulp-csso');
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
 
@@ -9,9 +9,9 @@ function css(cb) {
         'sass/salebox.scss',
     ])
     .pipe(sass())
-    .pipe(minifycss())
+    .pipe(csso())
     .pipe(concat('salebox.css'))
-    .pipe(dest('www/static/css/'));
+    .pipe(dest('../static/css/'));
 }
 
 function js(cb) {
@@ -22,6 +22,13 @@ function js(cb) {
         'www/staticsrc/js/*.js',
     ])
     .pipe(concat('salebox.js'))
-    .pipe(uglify())
+    .pipe(csso())
     .pipe(dest('www/static/'));
 }
+
+function watchFiles(cb) {
+    watch("www/staticsrc/sass/**/*", series(css));
+    // watch("www/staticsrc/js/*", series(js));
+}
+
+exports.default = series(css, parallel(watchFiles));
