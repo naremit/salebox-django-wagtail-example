@@ -21,11 +21,13 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 
-# Application definition
+# Application definition\
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'home',
     'search',
+    'user',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -50,7 +52,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.humanize',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +74,13 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'saleboxdjango.middleware.SaleboxMiddleware'
 ]
+
+AUTH_USER_MODEL = 'user.User'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 SALEBOX = {
     'ANALYTICS': {
@@ -196,14 +211,15 @@ MEDIA_URL = '/media/'
 
 
 # Wagtail settings
-
 WAGTAIL_SITE_NAME = "www"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
 
-
 DEBUG_TOOLBAR_CONFIG = {
     'RESULTS_CACHE_SIZE': 100
 }
+
+
+SOCIALACCOUNT_PROVIDERS = {}

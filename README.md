@@ -1,4 +1,4 @@
-This repo is a simple "cookiecutter" project template to create ecommerce websites powered by https://salebox.io, using Django and Wagtail CMS.
+This repo is a simple "cookiecutter" project template to create ecommerce websites powered by https://salebox.io, using Django, Wagtail CMS and django-allauth.
 
 This repo is a starting point for your project, it is not a *one size fits all* ecommerce solution, however much we would like it to be.
 
