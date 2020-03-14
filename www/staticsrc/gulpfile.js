@@ -27,8 +27,8 @@ function js(cb) {
 }
 
 function watchFiles(cb) {
-    watch("www/staticsrc/sass/**/*", series(css));
-    watch("www/staticsrc/js/*", series(js));
+    watch("sass/**/*", series(css));
+    watch("js/**/*", series(js));
 }
 
 exports.default = series(css, js, parallel(watchFiles));

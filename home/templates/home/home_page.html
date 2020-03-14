@@ -4,6 +4,9 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-stuff here
-<!-- {% include "salebox/product/product_list.html" %} -->
+<div class="container">
+    <!-- {% include "salebox/product/product_list_meta.html" %} -->
+    {% include "salebox/product/product_list.html" %}
+    <!-- {% include "salebox/utils/pagination.html" %} -->
+</div>
 {% endblock content %}
