@@ -1,0 +1,6 @@
+// custom .container-fluid
+.cf {
+    @include make-container();
+    max-width: 1140px;
+    width: auto;
+}
