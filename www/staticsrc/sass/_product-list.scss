@@ -1,8 +1,8 @@
 .product-list {
     display: grid;
-    grid-column-gap: 24px;
-    grid-row-gap: 24px;
-    grid-template-columns: auto;
+    grid-column-gap: 36px;
+    grid-row-gap: 36px;
+    grid-template-columns: 1fr;
     margin: 0 auto;
     max-width: 240px;
 
@@ -10,23 +10,57 @@
         grid-template-columns: auto auto;
         max-width: 400px;
     }
-    @include media-breakpoint-up(sm) { grid-template-columns: auto auto auto; max-width: none; }
-    @include media-breakpoint-up(md) { grid-template-columns: auto auto auto auto; }
-    @include media-breakpoint-up(lg) { grid-template-columns: auto auto auto auto auto; }
-    @include media-breakpoint-up(xl) { grid-template-columns: auto auto auto auto auto auto; }
+    @include media-breakpoint-up(sm) { grid-template-columns: 1fr 1fr 1fr; max-width: none; }
+    @include media-breakpoint-up(md) { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    @include media-breakpoint-up(lg) { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
+    @include media-breakpoint-up(xl) { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; }
 }
 
 .product-list-single {
-    .product-image {
+    a {
+        text-decoration: none;
+    }
+
+    .image {
         background-image: url('../img/image-unavailable.png');
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: contain;
     }
 
-    .product-image:after {
+    .image:after {
         content: "";
         display: block;
         padding-bottom: 100%;
     }
+
+    .name {
+        font-size: 15px;
+        font-weight: 300;
+        height: 45px;
+        line-height: 1.4;
+        overflow: hidden;
+        margin: 5px 8px 0;
+    }
+
+    .price {
+        color: #000;
+        font-size: 19px;
+        font-weight: 300;
+        line-height: 1;
+        margin: 3px 8px 0;
+
+        & > .currency > span { font-size: 12px; }
+        & > .currency-prev {
+            color: #aaa;
+            font-size: 13px;
+            font-weight: normal;
+            text-decoration: line-through;
+        }
+    }
+
+}
+
+.product-list-single:hover {
+    a .name { color: #000; }
 }

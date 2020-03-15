@@ -1,0 +1,22 @@
+.rating {
+    background-image: url('../img/ecommerce/rating_small.png');
+    height: 11px;
+    overflow: hidden;
+    margin: 3px 0;
+    width: 55px;
+}
+
+// "full" stars
+.rating-0 { background-position: -55px 0; }
+.rating-2 { background-position: -44px 0; }
+.rating-4 { background-position: -33px 0; }
+.rating-6 { background-position: -22px 0; }
+.rating-8 { background-position: -11px 0; }
+.rating-10 { background-position: 0px 0; }
+
+// "half" stars
+.rating-1 { background-position: -154px 0; }
+.rating-3 { background-position: -143px 0; }
+.rating-5 { background-position: -132px 0; }
+.rating-7 { background-position: -121px 0; }
+.rating-9 { background-position: -110px 0; }
