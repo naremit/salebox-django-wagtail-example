@@ -8,9 +8,9 @@
     Categories:
     <div class="mb-5">
         {% for t in categories.tree %}
-            <a href="/products/t.slug_path" class="d-inline-block pb-2">{{ t.name }}</a>
+            <a href="/products/t.slug_path" class="pb-2">{{ t.name }}</a>
             {% if not forloop.last %}
-                <span class="d-inline-block text-muted px-2 pb-2">/<span>
+                <span class="text-muted px-2 pb-2">/</span>
             {% endif %}
         {% endfor %}
     </div>

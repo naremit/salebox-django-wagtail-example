@@ -84,7 +84,7 @@ AUTHENTICATION_BACKENDS = (
 
 SALEBOX = {
     'ANALYTICS': {
-        'SEND': True
+        'SEND': False
     },
     'CHECKOUT': {
         'PRE_URL': '/basket/',
