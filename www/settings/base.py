@@ -26,11 +26,13 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     'home',
+    'products',
     'search',
     'user',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.routable_page',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
