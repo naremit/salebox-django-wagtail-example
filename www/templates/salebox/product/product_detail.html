@@ -4,11 +4,8 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-<div class="cf">
-    <div class="mb-5">
-        {% include "salebox/product/_category_list.html" %}
+    <div class="cf">
+        {% include "salebox/product/_product_detail.html" %}
     </div>
-
-    {% include "salebox/product/_product_list.html" %}
 </div>
 {% endblock content %}

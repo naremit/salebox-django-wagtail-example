@@ -13,7 +13,7 @@ class HomePage(Page):
 
         # fetch categories
         sc = SaleboxCategory()
-        context['categories'] = sc.get_tree('product_categories')
+        context['categories'] = sc.get_tree(cache_key='product_categories')
 
         # fetch products
         sp = SaleboxProduct()

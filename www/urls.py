@@ -11,28 +11,17 @@ from wagtail.images.views.serve import ServeView
 
 from saleboxdjango.views.account.basket import SaleboxAccountBasketView
 from saleboxdjango.views.account.wishlist import SaleboxAccountWishlistView
+from saleboxdjango.views.products.products import SaleboxProductsView
 
 from search import views as search_views
 
 
 urlpatterns = [
-    url(r'^django-admin/', admin.site.urls),
-    url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
+    re_path(r'^django-admin/', admin.site.urls),
+    re_path(r'^admin/', include(wagtailadmin_urls)),
+    re_path(r'^documents/', include(wagtaildocs_urls)),
     re_path(r'^img/([^/]*)/(\d*)/([^/]*)/[^/]*', ServeView.as_view(), name='wagtailimages_serve'),
 ]
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    import debug_toolbar
-
-    # Serve static and media files from development server
-    urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += [
-        path(r'__debug__/', include(debug_toolbar.urls))
-    ]
 
 # these URLs will have /<language_code>/ appended to the beginning
 urlpatterns += i18n_patterns(
@@ -41,6 +30,7 @@ urlpatterns += i18n_patterns(
     # path('checkout/', include('apps.checkout.urls')),
     # path('salebox/', include('saleboxdjango.urls')),
     # path('wishlist/', SaleboxAccountWishlistView.as_view()),
+    re_path(r'shop/(?P<path>.*)', SaleboxProductsView.as_view()),
 
     # fixed-path items: signup
     # path('signup/', SignUpInitView.as_view()),
@@ -59,3 +49,15 @@ urlpatterns += i18n_patterns(
     # path('', include('user.urls')),
     re_path(r'', include(wagtail_urls)),
 )
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    import debug_toolbar
+
+    # Serve static and media files from development server
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+        path(r'__debug__/', include(debug_toolbar.urls))
+    ]

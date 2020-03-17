@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+<div class="cf">
+    <div class="mb-5">
+        {% for t in categories.tree %}
+            <a href="/shop/{{ t.slug_path }}/" class="pb-2">{{ t.name }}</a>
+            {% if not forloop.last %}
+                <span class="text-muted px-2 pb-2">/</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% include "salebox/product/_product_list_meta.html" %}
+    {% include "salebox/product/_product_list.html" %}
+    {% include "salebox/utils/pagination.html" %}
+</div>
+{% endblock content %}
