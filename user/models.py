@@ -9,7 +9,7 @@ class User(SaleboxUser):
     email = models.EmailField(_('email address'), unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']  # this is here so createsuperuser works
 
     def __str__(self):
         return self.email

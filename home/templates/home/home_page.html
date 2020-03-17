@@ -9,7 +9,7 @@
 
     <div class="mb-5">
         {% for t in categories.tree %}
-            <a href="/products/{{ t.slug_path }}/" class="pb-2">{{ t.name }}</a>
+            <a href="/shop/{{ t.slug_path }}/" class="pb-2">{{ t.name }}</a>
             {% if not forloop.last %}
                 <span class="text-muted px-2 pb-2">/</span>
             {% endif %}

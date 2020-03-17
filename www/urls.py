@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls import url
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path, re_path
 
@@ -19,17 +20,7 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     re_path(r'^img/([^/]*)/(\d*)/([^/]*)/[^/]*', ServeView.as_view(), name='wagtailimages_serve'),
-
-    # fixed-path items: salebox
-    url(r'basket/', SaleboxAccountBasketView.as_view()),
-    # url(r'checkout/', include('apps.checkout.urls')),
-    url(r'salebox/', include('saleboxdjango.urls')),
-    url(r'wishlist/', SaleboxAccountWishlistView.as_view()),
-
-    # wagtail search view
-    url(r'^search/$', search_views.search, name='search'),
 ]
-
 
 if settings.DEBUG:
     from django.conf.urls.static import static
@@ -43,13 +34,28 @@ if settings.DEBUG:
         path(r'__debug__/', include(debug_toolbar.urls))
     ]
 
-urlpatterns = urlpatterns + [
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's page serving mechanism. This should be the last pattern in
-    # the list:
-    url(r"", include(wagtail_urls)),
+# these URLs will have /<language_code>/ appended to the beginning
+urlpatterns += i18n_patterns(
+    # fixed-path items: salebox
+    # path('basket/', SaleboxAccountBasketView.as_view()),
+    # path('checkout/', include('apps.checkout.urls')),
+    # path('salebox/', include('saleboxdjango.urls')),
+    # path('wishlist/', SaleboxAccountWishlistView.as_view()),
 
-    # Alternatively, if you want Wagtail pages to be served from a subpath
-    # of your site, rather than the site root:
-    #    url(r"^pages/", include(wagtail_urls)),
-]
+    # fixed-path items: signup
+    # path('signup/', SignUpInitView.as_view()),
+    # path('signup/form/', SignUpFormView.as_view()),
+    # path('signup/search/', SignUpSearchView.as_view()),
+    # path('signup/complete/', SignUpCompleteView.as_view()),
+    # path('signup/unset/', unset_sponsor),
+
+    # fixed-path items: inactive users
+    # path('account-suspended/', TemplateView.as_view(template_name='account/fbo_inactive.html', extra_context={'fbo_status': 'suspended'})),
+
+    # wagtail search view
+    # url(r'^search/$', search_views.search, name='search'),
+
+    # cms
+    # path('', include('user.urls')),
+    re_path(r'', include(wagtail_urls)),
+)
