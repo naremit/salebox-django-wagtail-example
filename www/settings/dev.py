@@ -11,13 +11,11 @@ ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
-}
-
 INTERNAL_IPS = ['127.0.0.1',]
+
+# prevent template caching in development
+TEMPLATES[0]['APP_DIRS'] = True
+del TEMPLATES[0]['OPTIONS']['loaders']
 
 SALEBOX['API'] = {
     'IP': '<SALEBOX_SERVER_IP>',

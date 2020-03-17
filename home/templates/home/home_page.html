@@ -6,6 +6,7 @@
 {% block content %}
 <div class="cf">
     Categories:
+
     <div class="mb-5">
         {% for t in categories.tree %}
             <a href="/products/{{ t.slug_path }}/" class="pb-2">{{ t.name }}</a>
@@ -16,7 +17,10 @@
     </div>
 
     {% include "salebox/product/product_list.html" %}
-    <!-- {% include "salebox/product/product_list_meta.html" %} -->
-    <!-- {% include "salebox/utils/pagination.html" %} -->
+
+    {% comment %}
+    {% include "salebox/product/product_list_meta.html" %}
+    {% include "salebox/utils/pagination.html" %}
+    {% endcomment %}
 </div>
 {% endblock content %}

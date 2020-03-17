@@ -64,7 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -119,7 +119,6 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -128,12 +127,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'saleboxdjango.context_processor.salebox',
             ],
-            #'loaders': [
-            #    ('django.template.loaders.cached.Loader', [
-            #        'django.template.loaders.filesystem.Loader',
-            #        'django.template.loaders.app_directories.Loader',
-            #    ]),
-            #]
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
+            ]
         },
     },
 ]
@@ -154,6 +153,17 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
