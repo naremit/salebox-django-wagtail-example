@@ -37,6 +37,6 @@ ua-parser==0.10.0
 Unidecode==1.1.1
 urllib3==1.25.8
 user-agents==2.1
-wagtail==2.8
+wagtail==2.9.3
 webencodings==0.5.1
 Willow==1.3
